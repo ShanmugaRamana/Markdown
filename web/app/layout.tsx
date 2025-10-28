@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <Header /> {/* Render Header directly */}
+        <Header/> {/* Render Header directly */}
         {children}
       </body>
     </html>

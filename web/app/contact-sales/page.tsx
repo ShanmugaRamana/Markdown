@@ -15,7 +15,7 @@ export default function ContactSales() {
   const [activeSectionTitle, setActiveSectionTitle] = useState(navItems[0].title);
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phone: '', institution: '', jobRole: '', address: '', state: '', country: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
+  const [submitStatus, setSubmitStatus] = useState<string | null>(null);
   const [submitMessage, setSubmitMessage] = useState('');
   const [showSuccessView, setShowSuccessView] = useState(false);
   const [showPendingView, setShowPendingView] = useState(false); // **NEW state for pending**
@@ -29,12 +29,12 @@ export default function ContactSales() {
      setSubmitMessage('');
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     resetViews(); // Reset views before submitting
@@ -63,7 +63,7 @@ export default function ContactSales() {
     } catch (error) {
       console.error('Submission Error:', error);
       setSubmitStatus('error');
-      setSubmitMessage(error.message || 'Failed to submit your request.');
+      setSubmitMessage((error as Error).message || 'Failed to submit your request.');
     } finally {
       setIsSubmitting(false);
     }

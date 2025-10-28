@@ -1,0 +1,403 @@
+/* Ensure the body itself doesn't scroll */
+:global(body) {
+  overflow-y: hidden; /* Prevent body scrolling */
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align to top */
+  height: 100vh;
+  padding-top: 140px;
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* Prevent main from scrolling */
+}
+
+.main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: white; /* Solid white background */
+}
+
+.contactLayout {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  position: relative;
+  z-index: 1;
+  height: calc(100vh - 140px);
+  max-height: calc(100vh - 140px);
+}
+
+/* --- Sidebar (Left Column) --- */
+.sidebar {
+  width: 400px;
+  flex-shrink: 0;
+  padding: 2rem;
+  position: fixed;
+  left: calc((100vw - 1200px) / 2);
+  top: 140px;
+  height: calc(100vh - 140px);
+  overflow-y: auto;
+  padding-bottom: 2rem;
+
+  /* ADDED: Hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* ADDED: Hide scrollbar for Webkit browsers */
+.sidebar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+
+.sidebar nav {
+  position: relative;
+}
+
+.sidebar nav::before {
+  content: '';
+  position: absolute;
+  left: calc(1rem + 2px);
+  top: 0.75rem;
+  bottom: 0.75rem;
+  width: 2px;
+  background-color: #7a7a7a;
+  z-index: 0;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #475569;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.navLink::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--text-color);
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.navLink:hover {
+  background-color: transparent;
+}
+
+.navLink:hover::before {
+  background-color: var(--text-color);
+}
+
+.navLink:not(.active):hover {
+  animation: gradientSweep 2s ease-in-out forwards;
+  background-size: 200% 100%;
+}
+
+.navLink.active {
+  background-color: transparent;
+  font-weight: 600;
+  background-image: radial-gradient(ellipse at top left, #a855f7, #f97316, #eab308);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.navLink.active::before {
+  background-color: transparent;
+  background-image: radial-gradient(ellipse at top left, #a855f7, #f97316, #eab308);
+}
+
+
+/* --- Content (Right Column) --- */
+.content {
+  flex-grow: 1;
+  padding: 2.5rem 3rem;
+  margin-left: 400px;
+  height: calc(100vh - 140px);
+  overflow-y: auto;
+
+  /* ADDED: Hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* ADDED: Hide scrollbar for Webkit browsers */
+.content::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.placeholder {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.formPlaceholder {
+  border: 2px dashed #e2e8f0;
+  border-radius: 8px;
+  padding: 4rem;
+  text-align: center;
+  color: #9ca3af;
+  background-color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="tel"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #000000;
+  border-radius: 0px;
+  font-size: 1rem;
+  color: #1f2937;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: transparent;
+  outline: none;
+}
+
+.formGroup input:focus {
+  border-width: 2px;
+  border-style: solid;
+  border-image-source: radial-gradient(ellipse at top left, #a855f7, #f97316, #eab308);
+  border-image-slice: 1;
+  box-shadow: none;
+  padding: calc(0.75rem - 1px) calc(1rem - 1px);
+}
+
+
+.submitButton {
+  background-color: transparent;
+  color: #000;
+  border: none;
+  padding: 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  align-self: flex-start;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.submitButton::after {
+  content: '→';
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.submitButton::before {
+  content: '';
+  position: absolute;
+  bottom: 0.6rem;
+  left: 0;
+  width: 0;
+  height: 2.5px;
+  background-color: #000;
+  transition: height 0.3s ease, width 0.3s ease;
+}
+
+.submitButton:hover::before {
+  height: 4px;
+  width: calc(100% + 10px);
+}
+
+.submitButton:hover::after {
+  transform: translateX(10px);
+}
+
+/* Styles for the success confirmation view */
+.successView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.successView h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.successView p {
+  font-size: 1.1rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.errorMessage {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 0.75rem 1.25rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  :global(body) {
+    overflow-y: auto; /* Allow body scroll on mobile */
+  }
+  .main {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+  .contactLayout {
+    flex-direction: column;
+    height: auto;
+    max-height: none;
+  }
+  .sidebar {
+    width: 100%;
+    position: relative;
+    left: 0;
+    top: 0;
+    height: auto;
+    overflow-y: visible; /* Show scrollbar if needed on mobile */
+    border-bottom: 1px solid #e2e8f0;
+    scrollbar-width: auto; /* Show scrollbar on mobile if needed */
+    -ms-overflow-style: auto;
+  }
+  .sidebar::-webkit-scrollbar {
+      display: block; /* Show scrollbar on mobile if needed */
+  }
+
+  .content {
+    margin-left: 0;
+    height: auto;
+    overflow-y: visible; /* Show scrollbar if needed on mobile */
+    scrollbar-width: auto; /* Show scrollbar on mobile if needed */
+    -ms-overflow-style: auto;
+  }
+   .content::-webkit-scrollbar {
+      display: block; /* Show scrollbar on mobile if needed */
+  }
+
+  .formRow {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .sidebar nav::before {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .sidebar {
+    left: 2rem;
+  }
+}
+
+/* Smooth gradient sweep animation */
+@keyframes gradientSweep {
+  0% {
+    background-image: linear-gradient(90deg, #475569 0%, #475569 30%, #a855f7 40%, #f97316 50%, #eab308 60%, #475569 70%, #475569 100%);
+    background-size: 300% 100%; background-position: 100% 0; color: transparent; background-clip: text; -webkit-background-clip: text;
+  }
+  70% {
+    background-image: linear-gradient(90deg, #475569 0%, #475569 30%, #a855f7 40%, #f97316 50%, #eab308 60%, #475569 70%, #475569 100%);
+    background-size: 300% 100%; background-position: 0% 0; color: transparent; background-clip: text; -webkit-background-clip: text;
+  }
+  100% {
+    background-image: linear-gradient(90deg, #000 0%, #000 100%); background-size: 100% 100%; background-position: 0% 0; color: transparent; background-clip: text; -webkit-background-clip: text;
+  }
+}
+.pendingView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1rem;
+  border: 1px solid #d1d5db; /* Similar to success view */
+  border-radius: 8px;
+  background-color: #ffffff; /* Light yellow background */
+  color: #713f12; /* Dark yellow/brown text */
+}
+
+.pendingView h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #854d0e; /* Darker yellow/brown heading */
+  margin-bottom: 0.5rem;
+}
+
+.pendingView p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}

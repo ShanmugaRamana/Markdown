@@ -1,0 +1,211 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  position: relative; 
+}
+
+.main::before {
+  content: '';
+  position: absolute;
+  inset: 0; 
+  z-index: 0; 
+  background-color: #FFFFFF;
+  /*background-image:
+    radial-gradient(circle at 20% 80%, rgba(255, 182, 153, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 244, 214, 0.5) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 182, 153, 0.1) 0%, transparent 50%);
+    */
+}
+
+/* --- Hero Section Styles --- */
+.heroContainer {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+  margin-top: -50px;
+  width: 100%;
+  gap: 2.5rem; /* Space between columns */
+  position: relative;
+  z-index: 1;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-shrink: 0; /* Prevents content from shrinking */
+  max-width: 650px; /* Same as heroLine3 max-width */
+}
+
+.popupColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 280px; /* Give columns a fixed width */
+  flex-shrink: 0;
+}
+
+/* --- Hero Content Styles --- */
+.heroLine1 {
+  font-size: 4.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  
+  background-image: radial-gradient(ellipse at top left, #a855f7, #f97316, #eab308);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.heroLine2 {
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.heroLine3 {
+  font-size: 1.1rem;
+  color: #475569;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.btnHeroPrimary, .btnHeroSecondary {
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 14px 28px;
+  margin-right: 0;
+}
+
+.btnHeroPrimary {
+  background-color: transparent; 
+  color: var(--text-color);
+  border: 1px solid black;
+}
+
+.btnHeroPrimary:hover {
+  background-color: #f2f2f2;
+}
+
+.btnHeroSecondary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+
+.btnHeroSecondary:hover {
+  opacity: 0.85;
+}
+
+.btnHeroSecondary .arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.btnHeroSecondary:hover .arrow {
+  animation: moveArrow 0.6s ease-in-out;
+}
+
+/* --- Popup Styles --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.popup {
+  position: relative;
+  z-index: 1;
+  background-color: #ffffff; /* Solid white background */
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  border: 1px solid #e2e8f0; 
+  animation: fadeIn 0.5s ease-out;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* Added a standard box-shadow */
+}
+
+/* REMOVED: .popup::before rule */
+
+
+.featurePopup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+}
+.featurePopup span { font-size: 1.5rem; }
+.featurePopup strong { font-size: 0.9rem; color: var(--text-color); }
+.featurePopup p { font-size: 0.85rem; color: #475569; }
+
+.statsPopup {
+  text-align: center;
+}
+.statsPopup h3 { font-size: 1.75rem; font-weight: 700; color: var(--text-color); }
+.statsPopup p { font-size: 0.9rem; color: #475569; }
+
+.downloadsPopup {
+  text-align: center;
+  animation-delay: 0.1s;
+}
+.downloadsPopup h3 { font-size: 1.75rem; font-weight: 700; color: var(--text-color); }
+.downloadsPopup p { font-size: 0.9rem; color: #475569; }
+
+.templatesPopup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  animation-delay: 0.2s;
+}
+.templatesPopup span { font-size: 1.5rem; }
+.templatesPopup strong { font-size: 0.9rem; color: var(--text-color); }
+.templatesPopup p { font-size: 0.85rem; color: #475569; }
+
+.integrationsPopup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation-delay: 0.3s;
+}
+.integrationsPopup span { font-size: 1.25rem; }
+.integrationsPopup p { font-size: 0.9rem; color: var(--text-color); font-weight: 500; }
+
+@keyframes moveArrow {
+  0% { transform: translateY(0); opacity: 1; }
+  49% { transform: translateY(-150%); opacity: 0; }
+  50% { transform: translateY(150%); opacity: 0; }
+  51% { opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 1024px) {
+  .popupColumn {
+    display: none;
+  }
+  .heroContent {
+    padding: 0;
+  }
+}

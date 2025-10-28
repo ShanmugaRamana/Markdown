@@ -1,0 +1,117 @@
+/* --- Floating Header Styles --- */
+.floatingHeader {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1100px;
+  
+  background-color: var(--header-bg);
+  border: none;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  backdrop-filter: blur(8px) saturate(100%) contrast(100%); 
+  background-clip: padding-box;
+  z-index: 1000;
+}
+
+.headerNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Nav Logo */
+.navLogo {
+  font-size: 1.25rem;
+  font-weight: 350;
+  color: var(--text-color);
+}
+
+/* Nav Links (Center) */
+.navLinks {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLinks a {
+  font-size: 0.95rem;
+  color: #475569;
+  transition: color 0.2s ease;
+}
+
+.navLinks a:hover {
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
+/* Nav Buttons (Right) */
+.navButtons {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+}
+
+.btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-right: -10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btnLogin {
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.btnLogin:hover {
+    color: black; 
+    font-weight: 600;
+}
+
+.btnContact {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  position: relative;
+  overflow: hidden;
+}
+
+.btnContact:hover {
+  opacity: 0.85;
+}
+
+.btnContact .arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.btnContact:hover .arrow {
+  animation: moveArrow 0.6s ease-in-out;
+}
+
+/* Keyframes for button arrow animation */
+@keyframes moveArrow {
+  0% { transform: translateY(0); opacity: 1; }
+  49% { transform: translateY(-150%); opacity: 0; }
+  50% { transform: translateY(150%); opacity: 0; }
+  51% { opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Media query from before */
+@media (max-width: 768px) {
+  .navLinks {
+    display: none;
+  }
+}
